@@ -6,7 +6,6 @@ list2 = another_list.split()
 
 list1.append(list2)
 
-print list1
 
 
 num = int(input("Enter the number:"))
