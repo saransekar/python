@@ -7,7 +7,6 @@ string_list = input_string.split()
 
 print string_list
 
-
 input_user = int(input("Enter the number:"))
 
 if(input_user > 0 and input_user  <= len(string_list)):
@@ -22,7 +21,6 @@ if(input_user > 0 and input_user  <= len(string_list)):
 
 		print string_list
 
-
 else:
 
 	print "Please Correct input start from 1 to n..."
@@ -34,18 +32,12 @@ for k in range(0, len(string_list)):
 
 	another_list = list(set_list)
 
-	print another_list
+ 	a.append(len(another_list))	
 
-	print len(another_list)
-
-	a.append(another_list)
-
- 	a.append(len(another_list))
- 	
 max_string = max(a)
 
-string = ''
+name_list = a.index(max_string)
 
-string = ''.join(map(str,max_string)) 
+string_name = string_list[name_list]
 
-print "Maximum letter of string:", string
+print "most matching of letter in string is equal to:",string_name
