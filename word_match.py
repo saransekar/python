@@ -8,6 +8,8 @@ def create_parser():
 
   parser.add_argument("word", help = "word help for searching in a file")
 
+  parser.add_argument("number", type = int)
+
   args = parser.parse_args()
 
   return args
@@ -17,38 +19,52 @@ def read_file(FileName):
 
   with open(FileName,'r') as file:
 
-    Content = file.read()
+    ContentWord = file.read()
    
-    ContentList =  Content.split(" ")
+    ContentList =  ContentWord.split(" ")
 
   return ContentList
 
 
-def find_match(GetContent,FindWord):
+def find_match(Content,FindWord,LimitNumber):
 
-  CreateList = []
+  AddList = []
 
-  for Word in GetContent:    
+  for Word in Content:    
 
     if Word != FindWord:
 
-      StringMatch = set(Word) & set(FindWord)
+      MatchWord = set(Word) & set(FindWord)
       
-      StringList = list(StringMatch)
+      WordList = list(MatchWord)
       
-      CreateList.append(len(StringList))
+      AddList.append(len(WordList))
+
       
     else:
 
-      CreateList.append(0)
-      
-  MaxValue = max(CreateList)
+      AddList.append(0)
 
-  IndexValue = CreateList.index(MaxValue)
+  AddList.sort()
 
-  MaxWord = GetContent[IndexValue]
+  print AddList 
 
-  return MaxWord
+  AddListCopy = AddList[-LimitNumber:]
+
+  print AddListCopy
+
+  for number in AddListCopy:
+
+    print number
+
+
+    IndexValue = AddListCopy.index(number)
+
+    print IndexValue
+
+    WordName = Content[IndexValue]
+
+  return WordName
 
 
 def main():
@@ -59,9 +75,11 @@ def main():
 
   FindWord = ArgsInput.word
 
-  GetContent = read_file(FileName)
+  LimitNumber = ArgsInput.number
 
-  result = find_match(GetContent,FindWord)
+  Content = read_file(FileName)
+
+  result = find_match(Content,FindWord,LimitNumber)
 
   print result
 
