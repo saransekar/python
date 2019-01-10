@@ -6,31 +6,29 @@ def create_parser():
 
   parser.add_argument("filename")
 
-  parser.add_argument("word", help = "name of the word")
+  parser.add_argument("word", help = "word help for searching in a file")
 
   args = parser.parse_args()
 
   return args
 
 
-def file_read(FileName):  
+def read_file(FileName):  
 
   with open(FileName,'r') as file:
 
-    content = file.read()
+    Content = file.read()
    
-    MyList =  content.split(" ")
+    ContentList =  Content.split(" ")
+
+  return ContentList
 
 
-  return MyList
+def find_match(GetContent,FindWord):
 
+  CreateList = []
 
-def find_string(MyList,FindWord):
-
-  EmptyList = []
-
-
-  for Word in MyList:
+  for Word in GetContent:    
 
     if Word != FindWord:
 
@@ -38,32 +36,32 @@ def find_string(MyList,FindWord):
       
       StringList = list(StringMatch)
       
-      EmptyList.append(len(StringList))
-
+      CreateList.append(len(StringList))
+      
     else:
 
-      EmptyList.append(0)
+      CreateList.append(0)
       
+  MaxValue = max(CreateList)
 
-  MaxNumber = max(EmptyList)
+  IndexValue = CreateList.index(MaxValue)
 
-  IndexList = EmptyList.index(MaxNumber)
+  MaxWord = GetContent[IndexValue]
 
-  MaxName = MyList[IndexList]
+  return MaxWord
 
-  return MaxName
 
 def main():
 
-  get_data1 = create_parser()
+  ArgsInput = create_parser()
 
-  FileName = get_data1.filename
+  FileName = ArgsInput.filename
 
-  FindWord = get_data1.word
+  FindWord = ArgsInput.word
 
-  get_data  = file_read(FileName)
+  GetContent = read_file(FileName)
 
-  result = find_string(get_data,FindWord)
+  result = find_match(GetContent,FindWord)
 
   print result
 
