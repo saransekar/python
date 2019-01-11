@@ -1,5 +1,9 @@
 import argparse
 
+import heapq
+
+from heapq import nlargest
+
 def create_parser(): 
 
   parser = argparse.ArgumentParser()
@@ -8,7 +12,7 @@ def create_parser():
 
   parser.add_argument("word", help = "word help for searching in a file")
 
-  parser.add_argument("number", type = int)
+  parser.add_argument("number", metavar='number', nargs='?', default='')
 
   args = parser.parse_args()
 
@@ -23,12 +27,16 @@ def read_file(FileName):
    
     ContentList =  ContentWord.split(" ")
 
+
+
   return ContentList
 
 
 def find_match(Content,FindWord,LimitNumber):
-
+  
   AddList = []
+
+  AddList1 = []
 
   for Word in Content:    
 
@@ -45,26 +53,43 @@ def find_match(Content,FindWord,LimitNumber):
 
       AddList.append(0)
 
-  AddList.sort()
+  words1 = { i : AddList[i] for i in range(0, len(AddList) ) }  
 
-  print AddList 
+  
 
-  AddListCopy = AddList[-LimitNumber:]
+  z = words1.values()
 
-  print AddListCopy
+  demo = max(z)
 
-  for number in AddListCopy:
+  for num, number in words1.items():
 
-    print number
+    if demo == number:
+
+      WordName = Content[num]
+
+      AddList1.append(WordName)
+        
+  return AddList1    
 
 
-    IndexValue = AddListCopy.index(number)
 
-    print IndexValue
+  """LargerNum = heapq.nlargest(len(AddList),words1.values())
 
-    WordName = Content[IndexValue]
+  print LargerNum
 
-  return WordName
+  three_largest = nlargest(len(AddList), words1, key=words1.get)
+
+  print three_largest
+
+  for demo1 in three_largest:
+
+    WordName = Content[demo1]
+
+    print WordName
+
+
+  return WordName"""
+
 
 
 def main():
@@ -82,6 +107,7 @@ def main():
   result = find_match(Content,FindWord,LimitNumber)
 
   print result
+
 
 
 if __name__ == '__main__':
