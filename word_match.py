@@ -27,8 +27,6 @@ def read_file(FileName):
    
     ContentList =  ContentWord.split(" ")
 
-
-
   return ContentList
 
 
@@ -36,7 +34,7 @@ def find_match(Content,FindWord,LimitNumber):
   
   AddList = []
 
-  AddList1 = []
+  MaxLetter = []
 
   for Word in Content:    
 
@@ -53,24 +51,44 @@ def find_match(Content,FindWord,LimitNumber):
 
       AddList.append(0)
 
-  words1 = { i : AddList[i] for i in range(0, len(AddList) ) }  
 
-  
+  NewDict = { i : AddList[i] for i in range(0, len(AddList) ) }  
 
-  z = words1.values()
+  IndexValues = NewDict.values()
 
-  demo = max(z)
+  MaxWordLength = max(IndexValues)
 
-  for num, number in words1.items():
+  for num, number in NewDict.items():
 
-    if demo == number:
+    if MaxWordLength == number:
 
       WordName = Content[num]
 
-      AddList1.append(WordName)
-        
-  return AddList1    
+      MaxLetter.append(WordName)
+      
+  return MaxLetter   
 
+
+
+  """for Limit in LimitNumber:
+
+    AddListCopy =  AddList
+
+    LimitWordLength = max(AddListCopy)
+
+    IndexValue = AddListCopy.index(LimitWordLength)
+
+    print IndexValue
+
+    AddListCopy[IndexValue] = 0
+
+    print AddListCopy
+
+    MaxWordName = Content[IndexValue]
+
+    print MaxWordName
+
+  return MaxWordName"""  
 
 
   """LargerNum = heapq.nlargest(len(AddList),words1.values())
