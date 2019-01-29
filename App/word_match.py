@@ -1,40 +1,48 @@
 import argparse
 
-def create_parser(): 
+import sys
+
+def create_parser():
+
+  """function to create argument parser and return inputs""" 
 
   parser = argparse.ArgumentParser()
 
   parser.add_argument("filename")
 
-  parser.add_argument("word", help = "word help for searching in a file")
+  parser.add_argument("word", help = "name of the words for searching")
 
-  parser.add_argument("limit", type = int, metavar='limit', nargs='?')
+  parser.add_argument("limit", type = int, metavar='limit', nargs='?', help = "enter the number")
 
   args = parser.parse_args()
 
   return args
 
 
-def read_file(FileName):  
+def read_file(FileName):
 
-  ContentWord = ""
+  """read a file in function and return content"""  
 
   try:
 
     with open(FileName,'r') as file:
    
-      ContentWord = file.read()
+      Content = file.read()
 
   except IOError as e:
+  
+    Content = ''
 
-    #print FileName,"No Such directory file not found."
+    print("\033[91m {}\033[00m" .format(FileName)),("\033[91m {}\033[00m" .format("File not found in directory.")) 
 
-    print("\033[91m {}\033[00m" .format(FileName)),("\033[91m {}\033[00m" .format("No Such directory file not found.")) 
+    sys.exit()
 
-  return ContentWord
+  return Content
 
 
-def seprate_word(ContentWord):
+def separate_words(ContentWord):
+
+  """split the words and return the list in function"""
 
   ContentList =  ContentWord.split(" ")
 
@@ -42,29 +50,23 @@ def seprate_word(ContentWord):
 
 
 def find_closest_match(ContentList,FindWord):
-  
-  WordLengthList = []
 
-  for Word in ContentList:    
+  """function to find closest match and return in dictionary"""
+ 
+  WordLengthList = []   
 
-    if Word != FindWord:
+  Words = [Word for Word in ContentList if Word != FindWord]
 
-      ClosestWord = set(Word) & set(FindWord)
-      
-      WordList = list(ClosestWord)
-      
-      WordLengthList.append(len(WordList))
+  ClosestWord = map(lambda Words :list(set(Words) & set(FindWord)), Words)
     
-    else:
-
-      WordLengthList.append(0)
-
-  ClosestMatch = { i : WordLengthList[i] for i in range(0, len(WordLengthList) ) }  
+  ClosestMatch = { i : len(ClosestWord[i]) for i in range(0, len(ClosestWord) ) }  
 
   return ClosestMatch   
 
 
-def remove_items(ClosestMatch):
+def eliminate_words(ClosestMatch):
+
+  """eliminate the words in dictionay"""
 
   ClosestMatch = {key: value for key, value in ClosestMatch.items() if value != 0}
 
@@ -72,6 +74,8 @@ def remove_items(ClosestMatch):
 
 
 def restrictive_word(ClosestMatch,ContentList,LimitNumber):
+
+  """limit the words in function and return results"""
 
   ClosestWords = []
   
@@ -88,7 +92,6 @@ def restrictive_word(ClosestMatch,ContentList,LimitNumber):
         WordContentList = ContentList[ClosestKey]
 
         ClosestWords.append(WordContentList)  
-
 
   else:
 
@@ -113,19 +116,24 @@ def main():
 
   Content = read_file(FileName)
 
-  #import pdb; pdb.set_trace()
 
-  if Content is not '':
+  if Content != '':
 
-    ContentList = seprate_word(Content)  
+    ContentList = separate_words(Content)  
 
     ClosestMatch = find_closest_match(ContentList,FindWord)
 
-    ClosestMatch = remove_items(ClosestMatch)
+    ClosestMatch = eliminate_words(ClosestMatch)
 
     result = restrictive_word(ClosestMatch,ContentList,LimitNumber)
 
     print result
+
+
+  elif Content == '':
+  
+    print "The File is empty"  
+    
 
 if __name__ == '__main__':
 
