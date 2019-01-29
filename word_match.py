@@ -1,71 +1,131 @@
 import argparse
 
+import heapq
+
+from heapq import nlargest
+
 def create_parser(): 
 
   parser = argparse.ArgumentParser()
 
   parser.add_argument("filename")
 
-  parser.add_argument("word", help = "name of the word")
+  parser.add_argument("word", help = "word help for searching in a file")
+
+  parser.add_argument("number", metavar='number', nargs='?', default='')
 
   args = parser.parse_args()
 
   return args
 
 
-def file_read(FileName):  
+def read_file(FileName):  
 
   with open(FileName,'r') as file:
 
-    content = file.read()
+    ContentWord = file.read()
    
-    MyList =  content.split(" ")
+    ContentList =  ContentWord.split(" ")
+
+  return ContentList
 
 
-  return MyList
+def find_match(Content,FindWord,LimitNumber):
+  
+  AddList = []
 
+  MaxLetter = []
 
-def find_string(MyList,FindWord):
-
-  EmptyList = []
-
-
-  for Word in MyList:
+  for Word in Content:    
 
     if Word != FindWord:
 
-      StringMatch = set(Word) & set(FindWord)
+      MatchWord = set(Word) & set(FindWord)
       
-      StringList = list(StringMatch)
+      WordList = list(MatchWord)
       
-      EmptyList.append(len(StringList))
+      AddList.append(len(WordList))
 
+      
     else:
 
-      EmptyList.append(0)
+      AddList.append(0)
+
+
+  NewDict = { i : AddList[i] for i in range(0, len(AddList) ) }  
+
+  IndexValues = NewDict.values()
+
+  MaxWordLength = max(IndexValues)
+
+  for num, number in NewDict.items():
+
+    if MaxWordLength == number:
+
+      WordName = Content[num]
+
+      MaxLetter.append(WordName)
       
+  return MaxLetter   
 
-  MaxNumber = max(EmptyList)
 
-  IndexList = EmptyList.index(MaxNumber)
 
-  MaxName = MyList[IndexList]
+  """for Limit in LimitNumber:
 
-  return MaxName
+    AddListCopy =  AddList
+
+    LimitWordLength = max(AddListCopy)
+
+    IndexValue = AddListCopy.index(LimitWordLength)
+
+    print IndexValue
+
+    AddListCopy[IndexValue] = 0
+
+    print AddListCopy
+
+    MaxWordName = Content[IndexValue]
+
+    print MaxWordName
+
+  return MaxWordName"""  
+
+
+  """LargerNum = heapq.nlargest(len(AddList),words1.values())
+
+  print LargerNum
+
+  three_largest = nlargest(len(AddList), words1, key=words1.get)
+
+  print three_largest
+
+  for demo1 in three_largest:
+
+    WordName = Content[demo1]
+
+    print WordName
+
+
+  return WordName"""
+
+
 
 def main():
 
-  get_data1 = create_parser()
+  ArgsInput = create_parser()
 
-  FileName = get_data1.filename
+  FileName = ArgsInput.filename
 
-  FindWord = get_data1.word
+  FindWord = ArgsInput.word
 
-  get_data  = file_read(FileName)
+  LimitNumber = ArgsInput.number
 
-  result = find_string(get_data,FindWord)
+  Content = read_file(FileName)
+
+  result = find_match(Content,FindWord,LimitNumber)
 
   print result
+
 
 
 if __name__ == '__main__':
