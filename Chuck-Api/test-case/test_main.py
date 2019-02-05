@@ -1,6 +1,6 @@
 import unittest
-
 import method
+import requests
 
 class TestMethod(unittest.TestCase):
 
@@ -8,7 +8,7 @@ class TestMethod(unittest.TestCase):
 
 		Response = method.make_connection('http://api.icndb.com/jokes/random',3)
 
-		self.assertRaises(Exception, method.make_connection("ConnectionError"))
+		self.assertRaises(requests.ConnectionError, method.make_connection("ConnectionError"))
 
 
 	def test_make_connection_success(self):
