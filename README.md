@@ -1,18 +1,21 @@
 ## Word Match 
 
-### Getting Started
+### Overview
 
 > Give the file name within the name of the words in the command terminal. finding closest words in the file and get the maximum closest word and it will be displayed.
 
+### Prerequisites
 
-## Running the tests
+- We are using python version 2.7.12 or latest version 3 and above may be used
 
-> Run the code test step by step using the unit testing framework and successfully tested. 
+	```Python 2.7.12```
 
-## Technologies
-- Python 2.7.12
+## Usage 
+ 
+> Run in the command terminal start with python filename and give the specific file name and name of the words for searching within limit numbers. 
+
 
 ## Status
 
-> Still the project is being developed. let's mention planned changes, the direction of development.
+> Still the program is being developed. let's mention planned changes, the direction of development.
 
