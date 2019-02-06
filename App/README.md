@@ -6,18 +6,24 @@
 
 ### Prerequisites
 
-- We are using python version 2.7.12 or latest version 3 and above may be used
-
-	```Python 2.7.12```
+- Installed python version 2.7.12 or above 
 
 ### Usage 
  
 > Run in the command terminal start with python filename and give the specific file name and name of the words for searching within limit numbers. 
 
+	```python word_match.py abcd.txt word```
+		> flag word finding closest words in the file and get the maximum closest word and it will be displayed. 
 
-### Status
+	```python word_match.py abcd.txt word 5```
+		> flag limit number finding closest words in the file and return 5 closest words and it will be displayed.
 
-> Still the program is being developed. let's mention planned changes, the direction of development.
+
+
+
+
+
+
 
 
 
