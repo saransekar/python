@@ -13,10 +13,10 @@
 > Run in the command terminal start with python filename and give the specific file name and name of the words for searching within limit numbers. 
 
 	```python word_match.py abcd.txt word```
-		> flag word finding closest words in the file and get the maximum closest word and it will be displayed. 
+	> flag word finding closest words in the file and get the maximum closest word and it will be displayed. 
 
 	```python word_match.py abcd.txt word 5```
-		> flag limit number finding closest words in the file and return 5 closest words and it will be displayed.
+	> flag limit number finding closest words in the file and return 5 closest words and it will be displayed.
 
 
 
