@@ -2,20 +2,20 @@
 
 ### Overview
 
-> Get response data through JSON from API and it will be displayed.
+> Easily get the random jokes from Chuck API. 
 
 ### Prerequisites
 
-- We are using python version 2.7.12 or latest version 3 and above may be used
+- Installed python version 2.7.12 or above
 
-	```Python 2.7.12```
-
-## Usage 
+### Usage 
  
-> Run in the command terminal start with python filename or within limit numbers. 
+> Run in the command terminal start with python filename or within limit numbers.
 
+	```python main.py```
+> get the random joke. 
 
-## Status
+	```python main.py 5```
+> flag limit number get the random jokes from chuck API and return 5 random jokes and it will be displayed.
 
-> Still the program is being developed. let's mention planned changes, the direction of development.
 
