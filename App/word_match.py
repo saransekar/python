@@ -1,5 +1,4 @@
 import argparse
-
 import sys
 
 def create_parser():
@@ -18,10 +17,11 @@ def create_parser():
 
   return args
 
-
 def read_file(FileName):
 
   """read a file in function and return content"""  
+  
+  Content = ''
 
   try:
 
@@ -30,12 +30,10 @@ def read_file(FileName):
       Content = file.read()
 
   except IOError as e:
-  
-    Content = ''
 
-    print("\033[91m {}\033[00m" .format(FileName)),("\033[91m {}\033[00m" .format("File not found in directory.")) 
+    sys.tracebacklimit = 0
 
-    sys.exit()
+    raise(IOError("\033[91m {}\033[00m" .format("File not found in directory.")))
 
   return Content
 
@@ -55,12 +53,14 @@ def find_closest_match(ContentList,FindWord):
  
   WordLengthList = []   
 
-  Words = [Word for Word in ContentList if Word != FindWord]
+  Words = [Word if Word != FindWord else "0" for Word in ContentList]  
 
-  ClosestWord = map(lambda Words :list(set(Words) & set(FindWord)), Words)
+  ClosestWord = list(map(lambda Words : set(Words) & set(FindWord), Words))  
     
   ClosestMatch = { i : len(ClosestWord[i]) for i in range(0, len(ClosestWord) ) }  
 
+  print(ClosestMatch)
+  
   return ClosestMatch   
 
 
@@ -70,6 +70,8 @@ def eliminate_words(ClosestMatch):
 
   ClosestMatch = {key: value for key, value in ClosestMatch.items() if value != 0}
 
+  print(ClosestMatch) 
+
   return ClosestMatch
 
 
@@ -78,8 +80,8 @@ def restrictive_word(ClosestMatch,ContentList,LimitNumber):
   """limit the words in function and return results"""
 
   ClosestWords = []
-  
-  ClosestList = sorted(ClosestMatch.iteritems(), key = lambda x : x[1], reverse = True)
+
+  ClosestList = sorted(ClosestMatch.items(), key = lambda x : x[1], reverse = True)
 
   ClosestMaxValue = ClosestList[0][1]
   
@@ -127,12 +129,11 @@ def main():
 
     result = restrictive_word(ClosestMatch,ContentList,LimitNumber)
 
-    print result
-
+    print(result)
 
   elif Content == '':
   
-    print "The File is empty"  
+    print("The File is empty")
     
 
 if __name__ == '__main__':
