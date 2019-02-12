@@ -1,5 +1,4 @@
 import unittest
-
 import word_match
 
 class TestWord_Match(unittest.TestCase):
@@ -14,12 +13,11 @@ class TestWord_Match(unittest.TestCase):
 		self.assertEqual(FileContent,MatchedContent)
 
 
-
 	def test_read_file_failed(self):
 
 		FileContent = word_match.read_file("ab.txt")
 
-		self.assertRaises(IOError, word_match.read_file("ab.txt"))
+		self.assertRaises(IOError, word_match.read_file())
 
 			
 	def test_separate_words_success(self):
@@ -52,7 +50,7 @@ class TestWord_Match(unittest.TestCase):
 
 		ClosestMatch = word_match.find_closest_match(ContentList,'ac')
 
-		Output = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2}	
+		Output = {0: 1, 1: 0, 2: 1, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2}	
 
 		self.assertEqual(Output,ClosestMatch)
 	
@@ -80,7 +78,7 @@ class TestWord_Match(unittest.TestCase):
 
 		ClosestMatch = word_match.eliminate_words(ClosestMatch)
 
-		Output = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 2, 6: 2, 7: 2}
+		Output = {0: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 2, 7: 2, 8: 2}
 
 		self.assertEqual(Output,ClosestMatch)
 	
@@ -113,7 +111,7 @@ class TestWord_Match(unittest.TestCase):
 	
 		ClosestWords = word_match.restrictive_word(ClosestMatch,ContentList,2)
 
-		Output = ['aah', 'acab']
+		Output = ['acab', 'aac']
 
 		self.assertEqual(Output,ClosestWords)
 
@@ -136,12 +134,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertNotEqual(Output,ClosestWords)
 	
-
-
-
-
-
-
 
 if __name__ == '__main__':
 
