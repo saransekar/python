@@ -13,8 +13,6 @@ def create_parser():
 
 	return args
 
-
-
 if __name__ == '__main__':
 	
 	api = http_method.API_Request()
