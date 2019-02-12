@@ -131,7 +131,7 @@ def main():
 
     print(result)
 
-  elif Content == '':
+  else:
   
     print("The File is empty")
     
