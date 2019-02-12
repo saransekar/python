@@ -16,7 +16,7 @@ def create_parser():
 
 	return args
 
-def make_connection(BASE_URL,LimitNumber):
+def get_response(BASE_URL,LimitNumber):
 		
 	try:
 
@@ -34,7 +34,7 @@ def get_data(ResponseData,LimitNumber):
 
 	ResJsonDataList = []
 
-	ResponseJson = json.loads(ResponseData.content)
+	ResponseJson = json.loads(ResponseData.content.decode('utf-8'))
 
 	for Number in range(LimitNumber):
 
@@ -58,7 +58,7 @@ def main():
 
 	for joke_idx, joke_val in enumerate(ResJsonDataList):
 
-		print joke_idx + 1, joke_val
+		print("{} {}".format(joke_idx + 1, joke_val))
 
 
 if __name__ == '__main__':
