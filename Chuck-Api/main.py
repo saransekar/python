@@ -52,7 +52,7 @@ def main():
 
 	LimitNumber = (1,LimitNumber)[LimitNumber != None]
 
-	ResponseData = make_connection(BASE_URL,LimitNumber)
+	ResponseData = get_response(BASE_URL,LimitNumber)
 
 	ResJsonDataList = get_data(ResponseData, LimitNumber)
 
