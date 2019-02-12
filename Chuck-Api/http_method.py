@@ -24,7 +24,6 @@ class API_Request:
 
 		return ResponseData 
 
-
 	def get_data(self,ResponseData,LimitNumber):
 
 		ResJsonDataList = []
