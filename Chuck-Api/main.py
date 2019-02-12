@@ -1,4 +1,4 @@
-import api_method
+import http_method
 import argparse
 
 def create_parser():
@@ -17,7 +17,7 @@ def create_parser():
 
 if __name__ == '__main__':
 	
-	api = api_method.API_Request()
+	api = http_method.API_Request()
 
 	ArgsInput = create_parser()
 
@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
 	LimitNumber = (1,LimitNumber)[LimitNumber != None]
 
-	ResponseData = api.get_response(api_method.BASE_URL,LimitNumber,Word)
+	ResponseData = api.get_response(http_method.BASE_URL,LimitNumber,Word)
 
 	ResJsonDataList = api.get_data(ResponseData, LimitNumber)
 
