@@ -3,7 +3,6 @@ import word_match
 
 class TestWord_Match(unittest.TestCase):
 
-
 	def test_read_file_success(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -12,14 +11,12 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertEqual(FileContent,MatchedContent)
 
-
 	def test_read_file_failed(self):
 
 		FileContent = word_match.read_file("ab.txt")
 
 		self.assertRaises(IOError, word_match.read_file())
-
-			
+		
 	def test_separate_words_success(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -29,7 +26,6 @@ class TestWord_Match(unittest.TestCase):
 		MatchedWord =  ['ab', 'ac', 'ad', 'af', 'ag', 'aah', 'acab', 'aac', 'acad\n']
 
 		self.assertEqual(MatchedWord,ContentList)
-
 
 	def test_separate_words_failed(self):
 
@@ -41,7 +37,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertNotEqual(MatchedWord,ContentList)
 
-	
 	def test_find_closest_match_success(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -54,7 +49,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertEqual(Output,ClosestMatch)
 	
-
 	def test_find_closest_match_failed(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -67,7 +61,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertNotEqual(Output,ClosestMatch)
 			
-
 	def test_eliminate_words_success(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -82,7 +75,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertEqual(Output,ClosestMatch)
 	
-
 	def test_eliminate_words_failed(self):
 
 		FileContent = word_match.read_file("abcd.txt")
@@ -97,9 +89,7 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertNotEqual(Output,ClosestMatch)
 
-
 	def test_restrictive_word_success(self):
-
 
 		FileContent = word_match.read_file("abcd.txt")
 
@@ -115,10 +105,7 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertEqual(Output,ClosestWords)
 
-
-
 	def test_restrictive_word_failed(self):
-
 
 		FileContent = word_match.read_file("abcd.txt")
 
@@ -134,7 +121,6 @@ class TestWord_Match(unittest.TestCase):
 
 		self.assertNotEqual(Output,ClosestWords)
 	
-
 if __name__ == '__main__':
 
 	unittest.main()
