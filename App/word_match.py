@@ -2,7 +2,6 @@ import argparse
 import sys
 
 def create_parser():
-
   """function to create argument parser and return inputs""" 
 
   parser = argparse.ArgumentParser()
@@ -18,7 +17,6 @@ def create_parser():
   return args
 
 def read_file(FileName):
-
   """read a file in function and return content"""  
   
   Content = ''
@@ -37,18 +35,14 @@ def read_file(FileName):
 
   return Content
 
-
 def separate_words(ContentWord):
-
   """split the words and return the list in function"""
 
   ContentList =  ContentWord.split(" ")
 
   return ContentList
 
-
 def find_closest_match(ContentList,FindWord):
-
   """function to find closest match and return in dictionary"""
  
   WordLengthList = []   
@@ -58,25 +52,17 @@ def find_closest_match(ContentList,FindWord):
   ClosestWord = list(map(lambda Words : set(Words) & set(FindWord), Words))  
     
   ClosestMatch = { i : len(ClosestWord[i]) for i in range(0, len(ClosestWord) ) }  
-
-  print(ClosestMatch)
-  
+ 
   return ClosestMatch   
 
-
 def eliminate_words(ClosestMatch):
-
   """eliminate the words in dictionay"""
 
   ClosestMatch = {key: value for key, value in ClosestMatch.items() if value != 0}
 
-  print(ClosestMatch) 
-
   return ClosestMatch
 
-
 def restrictive_word(ClosestMatch,ContentList,LimitNumber):
-
   """limit the words in function and return results"""
 
   ClosestWords = []
@@ -105,7 +91,6 @@ def restrictive_word(ClosestMatch,ContentList,LimitNumber):
      
   return ClosestWords
 
-
 def main():
 
   ArgsInput = create_parser()
@@ -117,7 +102,6 @@ def main():
   LimitNumber = ArgsInput.limit
 
   Content = read_file(FileName)
-
 
   if Content != '':
 
@@ -135,7 +119,6 @@ def main():
   
     print("The File is empty")
     
-
 if __name__ == '__main__':
 
   main()
