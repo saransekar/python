@@ -42,14 +42,3 @@ def main():
 if __name__ == '__main__':
 	 main()
 
-
-def loop():
-	limit = 0
-	add = 0
-	while limit < 5:
-		add += addition(5,6)
-		if add > 20:
-			break
-		limit += 1
-
-	return add
